@@ -46,7 +46,7 @@ export default function textAnimation(renderer: THREE.WebGLRenderer, onComplete:
   const fontLoader = new FontLoader();
   fontLoader.load(
     //'/roboto_regular.json', // Betűtípus elérési útja
-    'http://localhost:4173/roboto_regular.json',
+    'https://beneschjozsef.github.io/vue3-cannonjs-threejs/roboto_regular.json',
     (font) => {
       const textGeometry = new TextGeometry('SORSOLÁS', {
         font: font,
