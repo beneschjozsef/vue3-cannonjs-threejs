@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 
-export default function mainAnimation(renderer: THREE.WebGLRenderer) {
+export default function mainAnimation(renderer: THREE.WebGLRenderer, numbers: number[]) {
   interface Ball {
     group: THREE.Group;
     body: CANNON.Body | null;
@@ -10,7 +10,6 @@ export default function mainAnimation(renderer: THREE.WebGLRenderer) {
   }
 
   renderer.domElement.style.opacity = '1';
-  console.info('main start');
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
   camera.position.set(0, -2, 15);
@@ -55,7 +54,6 @@ export default function mainAnimation(renderer: THREE.WebGLRenderer) {
   });
 
   const balls: Ball[] = [];
-  const selectedNumbers = [12, 25, 37, 48, 89];
 
   for (let i = 1; i <= 90; i++) {
     const radius = 0.45;
@@ -108,8 +106,8 @@ export default function mainAnimation(renderer: THREE.WebGLRenderer) {
     balls.push({
       group: ballGroup,
       body: body,
-      isSelected: selectedNumbers.includes(i),
-      targetX: selectedNumbers.includes(i) ? selectedNumbers.indexOf(i) - 2 : null,
+      isSelected: numbers.includes(i),
+      targetX: numbers.includes(i) ? numbers.indexOf(i) - 2 : null,
     });
   }
 
@@ -142,7 +140,7 @@ export default function mainAnimation(renderer: THREE.WebGLRenderer) {
     renderer.render(scene, camera);
   }
 
-  selectedNumbers.forEach((_, index) => {
+  numbers.forEach((_, index) => {
     setTimeout(
       () => {
         const selectedBall = balls.find((ball) => ball.isSelected && ball.targetX === index - 2);
@@ -215,7 +213,6 @@ export default function mainAnimation(renderer: THREE.WebGLRenderer) {
       } else {
         camera.position.set(0, -2, 15);
         camera.lookAt(0, -2, 0);
-        console.log('set back');
       }
     }
     spinAnimation();

@@ -1,5 +1,5 @@
 <template>
-  <LotteryAnimation />
+  <LotteryAnimation :numbers="[1, 12, 33, 44, 60]" />
 </template>
 
 <script setup lang="ts">

@@ -2,30 +2,27 @@
   <div ref="animationContainer"></div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, onMounted, ref } from 'vue';
+<script setup lang="ts">
+  import { onMounted, ref } from 'vue';
   import * as THREE from 'three';
   import textAnimation from './textAnimation';
   import mainAnimation from './mainAnimation';
 
-  export default defineComponent({
-    name: 'LotteryAnimation',
-    setup() {
-      const animationContainer = ref<HTMLDivElement | null>(null);
+  const props = defineProps<{ numbers: string | number[] }>();
 
-      onMounted(() => {
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        animationContainer.value?.appendChild(renderer.domElement);
+  const numbers = typeof props.numbers === 'string' ? JSON.parse(props.numbers) : props.numbers;
 
-        textAnimation(renderer, () => {
-          mainAnimation(renderer);
-        });
-      });
+  const animationContainer = ref<HTMLDivElement | null>(null);
 
-      return { animationContainer };
-    },
+  onMounted(() => {
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    animationContainer.value?.appendChild(renderer.domElement);
+
+    textAnimation(renderer, () => {
+      mainAnimation(renderer, numbers);
+    });
   });
 </script>
 

@@ -59,6 +59,11 @@ https://<username>.github.io/lottery-animation/
 ```
 Replace `<username>` with your GitHub username.
 
+## Web Component usage example
+```
+<lottery-animation numbers="[10, 22, 32, 43, 52]"></lottery-animation>
+ <script type="module" src="https://beneschjozsef.github.io/vue3-cannonjs-threejs/lotteryAnimation.js"></script>
+```
 ## Contributing
 
 Contributions are welcome! If you have suggestions for improvements or features, feel free to open an issue or submit a pull request.
